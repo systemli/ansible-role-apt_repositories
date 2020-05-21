@@ -24,10 +24,15 @@
     _name: "{{ _config.url|urlsplit('hostname') }}"
   when: _config.name is undefined
 
+- name: Update cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+  changed_when: false
+
 - name: Install dependecies
   apt:
     pkg: "{{ apt_repository_dependencies }}"
-    update_cache: true
 
 - name: Ensure we can transport via https
   apt:
