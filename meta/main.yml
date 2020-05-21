@@ -1,0 +1,24 @@
+galaxy_info:
+  role_name: apt_repository
+  author: systemli.org
+  description: Add third-party repositories on Debian in a secure way
+  license:
+    - GPL-3.0-only
+  min_ansible_version: 2.4
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    #- name: Ubuntu
+    #  versions:
+    #    - xenial
+    #    - bionic
+    #    - focal
+
+  galaxy_tags:
+    - apt
+    - https
+    - secure
+
+dependencies: []

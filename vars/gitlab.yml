@@ -1,0 +1,6 @@
+---
+name: packages.gitlab.com
+url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
+key_path: gitlab.asc
+packages:
+  - gitlab-ce

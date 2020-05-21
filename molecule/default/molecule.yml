@@ -1,0 +1,15 @@
+---
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+platforms:
+  - name: buster64-repo
+    box: debian/buster64
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+provisioner:
+  name: ansible
+  become: True
