@@ -69,4 +69,3 @@
         # override preset partially (binary key)
         - preset: gitlab
           key_path: gitlab.gpg
-        
