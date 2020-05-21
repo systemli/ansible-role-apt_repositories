@@ -6,6 +6,11 @@ apt_repository
 Add third-party repositories in Debian and derivates and pin their packages.
 Follows guide from [Debian wiki](https://wiki.debian.org/DebianRepository/UseThirdParty).
 
+Requirements
+------------
+
+Debian 9+ or Ubuntu 18.04+. Other versions of Debian/Ubuntu might be supported as well, but aren't tested.
+
 Role Variables
 --------------
 
