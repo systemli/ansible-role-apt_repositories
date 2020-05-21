@@ -1,6 +1,8 @@
 apt_repository
 =============
 
+[![Build Status](https://travis-ci.org/systemli/ansible-role-apt_repository.svg?branch=master)](https://travis-ci.org/systemli/ansible-role-apt_repository)
+
 Add third-party repositories in Debian and derivates and pin their packages.
 Follows guide from [Debian wiki](https://wiki.debian.org/DebianRepository/UseThirdParty).
 

@@ -26,7 +26,8 @@
 
 - name: Install dependecies
   apt:
-    pkg: ca-certificates
+    pkg: "{{ apt_repository_dependencies }}"
+    update_cache: true
 
 - name: Ensure we can transport via https
   apt:

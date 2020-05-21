@@ -1,2 +1,6 @@
 ---
 # defaults file for apt_repository
+
+apt_repository_dependencies:
+  - ca-certificates
+  - gnupg
