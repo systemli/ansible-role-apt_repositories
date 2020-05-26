@@ -4,8 +4,8 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: buster64-repo
-    box: debian/buster64
+  - name: bionic64-repo
+    box: ubuntu/bionic64
 lint: |
   set -e
   yamllint .

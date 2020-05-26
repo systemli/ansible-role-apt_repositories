@@ -8,7 +8,7 @@
     apt_repositories:
       # all vars given
       - name: packages.gitlab.com
-        url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
+        url: https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_distribution | lower }}/
         key: |
           -----BEGIN PGP PUBLIC KEY BLOCK-----
 
