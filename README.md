@@ -43,25 +43,44 @@ Example Playbook
 ----------------
 
 ```
-...
-role: systemli.apt_repositories
-vars:
-  apt_repositories:
-    - name: packages.gitlab.com
-      url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
-      key: "{{ gitlab_ce_key }}"
-      packages:
-        - gitlab-ce
-...
+- hosts: server
+  roles:
+    - systemli.apt_repositories
+  vars:
+    apt_repositories:
+      - name: packages.gitlab.com
+        url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
+        key: "{{ gitlab_ce_key }}"
+        packages:
+          - gitlab-ce
 ```
+
 or
+
 ```
+- hosts: server
+  roles:
+    - systemli.apt_repositories
+  vars:
+    apt_repositories:
+      - preset: gitlab
+```
+
+or just add it as a dependency for `ansible-galaxy`:
+
+```
+# meta/main.yml
 ...
-role: systemli.apt_repositories
-vars:
-  apt_repositories:
-    - preset: gitlab
-...
+dependencies:
+  - role: systemli.apt_repositories
+    vars:
+      apt_repositories:
+        - name: download.jitsi.org
+          url: https://download.jitsi.org/
+          key_path: jitsi-archive-keyring.gpg
+          suites: stable/
+          components: ''
+          packages: "{{ jitsi_meet_packages }}"
 ```
 
 License
