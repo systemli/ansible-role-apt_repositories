@@ -1,10 +1,10 @@
-apt_repository
-=============
+apt_repositories
+================
 
-[![Build Status](https://travis-ci.org/systemli/ansible-role-apt_repository.svg?branch=master)](https://travis-ci.org/systemli/ansible-role-apt_repository)
+[![Build Status](https://travis-ci.org/systemli/ansible-role-apt_repositories.svg?branch=master)](https://travis-ci.org/systemli/ansible-role-apt_repositories)
 
 Add third-party repositories in Debian and derivates and pin their packages.
-Follows guide from [Debian wiki](https://wiki.debian.org/DebianRepository/UseThirdParty).
+Follows guide from [Debian wiki](https://wiki.debian.org/Debianrepositories/UseThirdParty).
 
 Requirements
 ------------
@@ -14,25 +14,26 @@ Debian 9+ or Ubuntu 18.04+. Other versions of Debian/Ubuntu might be supported a
 Role Variables
 --------------
 
-This role is intended to be used with `include_role`. The minimal necessary variables are:
+```
+apt_repositories:
+  - url: https://...
+    key: |
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+      MY_ARMORED_KEY
+      ...
+```
+
+Further possible variables (and their defaults) are:
 
 ```
-url: https://...
-key: |
-  -----BEGIN PGP PUBLIC KEY BLOCK-----
-  MY_ARMORED_KEY
-  ...
-```
-
-Further possible variables (and their defaults)i are:
-
-```
-name: "{{ item.url|urlsplit('hostname') }}"
-types: deb
-suites: "{{ ansible_distribution_release }}"
-components: main
-packages: []
-key_path: # a file path in the role `files` dir instead of `key`
+apt_repositories:
+  - url: https://...
+    name: "{{ item.url|urlsplit('hostname') }}"
+    types: deb
+    suites: "{{ ansible_distribution_release }}"
+    components: main
+    packages: []
+    key_path: # a file path in the role `files` dir instead of `key`
 ```
 
 Furthermore, it supports `preset` values. For an example see `vars/gitlab.yml`. PRs welcome!
@@ -43,27 +44,23 @@ Example Playbook
 
 ```
 ...
-tasks:
-  - name: Add gitlab-ce repo
-    include_role:
-      name:  systemli.apt_repository
-    loop:
-      - name: packages.gitlab.com
-        url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
-        key: "{{ gitlab_ce_key }}"
-        packages:
-          - gitlab-ce
+role: systemli.apt_repositories
+vars:
+  apt_repositories:
+    - name: packages.gitlab.com
+      url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
+      key: "{{ gitlab_ce_key }}"
+      packages:
+        - gitlab-ce
 ...
 ```
 or
 ```
 ...
-tasks:
-  - name: Add gitlab-ce repo
-    include_role:
-      name:  systemli.apt_repository
-    loop:
-      - preset: gitlab
+role: systemli.apt_repositories
+vars:
+  apt_repositories:
+    - preset: gitlab
 ...
 ```
 

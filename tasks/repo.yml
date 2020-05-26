@@ -1,0 +1,53 @@
+---
+
+- name: Read in preset
+  include_vars:
+    file: "{{ item.preset }}.yml"
+    name: _preset
+  when: _preset|default({}) != None and item.preset is defined
+  # hack to clear _preset https://medium.com/opsops/how-to-undefine-fact-in-ansible-5fff46432360
+
+- name: combine preset with given config
+  set_fact:
+    _config: "{{ _preset|default({})|combine(item) }}"
+
+#- debug:
+#    var: _config
+
+- name: ensure we have a repo name 1
+  set_fact:
+    _name: "{{ _config.name }}"
+  when: _config.name is defined
+
+- name: ensure we have a repo name 2
+  set_fact:
+    _name: "{{ _config.url|urlsplit('hostname') }}"
+  when: _config.name is undefined
+
+- name: Add key for {{ _name }} by content
+  apt_key:
+    data: "{{ _config.key }}"
+    keyring: /usr/share/keyrings/{{ _name }}.gpg
+  when: _config.key is defined
+
+- import_tasks: key_path.yml
+  when: _config.key is undefined
+
+- name: Add repository {{ _name }}
+  template:
+    src: repo.sources.j2
+    dest: /etc/apt/sources.list.d/{{ _name }}.sources
+    owner: root
+    group: root
+    mode: 0644
+
+# apt currently only support meaningful pinning by hostname
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=858406
+
+- name: Add pinning preferences for {{ _name }}
+  template:
+    src: pref.j2
+    dest: /etc/apt/preferences.d/{{ _name }}.pref
+    owner: root
+    group: root
+    mode: 0644
