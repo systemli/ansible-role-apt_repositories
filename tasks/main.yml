@@ -3,7 +3,6 @@
 - name: Update cache
   apt:
     update_cache: true
-    cache_valid_time: 3600
   changed_when: false
 
 - name: Install dependecies
@@ -18,3 +17,8 @@
 
 - include_tasks: repo.yml
   loop: "{{ apt_repositories }}"
+
+- name: Update cache
+  apt:
+    update_cache: true
+  changed_when: false
