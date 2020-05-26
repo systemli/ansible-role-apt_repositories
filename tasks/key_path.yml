@@ -10,7 +10,7 @@
   check_mode: false
   changed_when: false
 
-- name: Find out whether this is armored
+- name: Find out whether {{ _config.key_path }} is armored
   stat:
     path: /tmp/{{ _name }}.gpg
   register: _file

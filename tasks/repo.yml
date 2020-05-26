@@ -33,6 +33,20 @@
 - import_tasks: key_path.yml
   when: _config.key is undefined
 
+- name: Register final keyring stats
+  stat:
+    path: /usr/share/keyrings/{{ _name }}.gpg
+  register: _f
+
+- debug:
+    var: _f
+
+- name: Ensure we have binary key
+  assert:
+    that:
+      - _f.stat.exists
+      - _f.stat.charset == 'binary'
+
 - name: Add repository {{ _name }}
   template:
     src: repo.sources.j2
