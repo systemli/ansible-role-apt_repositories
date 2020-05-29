@@ -36,8 +36,17 @@ apt_repositories:
     key_path: # a file path in the role `files` dir instead of `key`
 ```
 
-Furthermore, it supports `preset` values. For an example see `vars/gitlab.yml`. PRs welcome!
+Furthermore, it supports `preset` values. For an example see `vars/gitlab.yml`.
 Presets can be partially overridden.
+
+Current presets:
+
+  - gitlab
+  - jitsi
+  - prosody
+  - sury
+
+PRs welcome!
 
 Example Playbook
 ----------------

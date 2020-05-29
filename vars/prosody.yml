@@ -1,0 +1,6 @@
+---
+url: https://packages.prosody.im/debian
+key_path: prosody-debian-packages.gpg
+packages:
+  - prosody
+  - "lua-*"
