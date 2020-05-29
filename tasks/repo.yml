@@ -11,8 +11,8 @@
   set_fact:
     _config: "{{ _preset|default({})|combine(item) }}"
 
-#- debug:
-#    var: _config
+# - debug:
+#     var: _config
 
 - name: ensure we have a repo name 1
   set_fact:
@@ -38,8 +38,8 @@
     path: /usr/share/keyrings/{{ _name }}.gpg
   register: _f
 
-- debug:
-    var: _f
+# - debug:
+#     var: _f
 
 - name: Ensure we have binary key
   assert:
