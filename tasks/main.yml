@@ -1,5 +1,11 @@
 ---
 
+- name: Remove old repositories
+  file:
+    path: "/etc/apt/sources.list.d/{{ item }}"
+    state: absent
+  with_items: "{{ apt_repositories_absent }}"
+
 - name: Update cache
   apt:
     update_cache: true

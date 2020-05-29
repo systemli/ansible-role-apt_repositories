@@ -4,3 +4,5 @@ apt_repositories_dependencies:
   - ca-certificates
   - file
   - gnupg
+
+apt_repositories_absent: []
