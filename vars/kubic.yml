@@ -1,0 +1,8 @@
+---
+name: kubic
+style: line
+url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_10/
+suites: /
+key_path: kubic.asc
+packages:
+  - podman

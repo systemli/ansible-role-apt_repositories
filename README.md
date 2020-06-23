@@ -6,6 +6,8 @@ apt_repositories
 Add third-party repositories in Debian and derivates and pin their packages.
 Follows guide from [Debian wiki](https://wiki.debian.org/DebianRepository/UseThirdParty).
 
+It defaults to deb822, but also allows single line style ([manpage](https://manpages.debian.org/buster/apt/sources.list.5.en.html#THE_DEB_AND_DEB-SRC_TYPES:_GENERAL_FORMAT)).
+
 Requirements
 ------------
 
@@ -42,7 +44,9 @@ Presets can be partially overridden.
 Current presets:
 
   - gitlab
+  - grafana
   - jitsi
+  - kubic
   - prosody
   - sury
 

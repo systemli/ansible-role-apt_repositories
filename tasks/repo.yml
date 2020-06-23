@@ -1,11 +1,16 @@
 ---
 
+- name: Clear preset
+  include_vars: null.yml
+
 - name: Read in preset
   include_vars:
     file: "{{ item.preset }}.yml"
     name: _preset
-  when: _preset|default({}) != None and item.preset is defined
-  # hack to clear _preset https://medium.com/opsops/how-to-undefine-fact-in-ansible-5fff46432360
+  when: item.preset is defined
+
+# - debug:
+#     var: _preset
 
 - name: combine preset with given config
   set_fact:
@@ -17,21 +22,21 @@
 - name: ensure we have a repo name 1
   set_fact:
     _name: "{{ _config.name }}"
-  when: _config.name is defined
+  when: _config.name is defined and _config.name
 
 - name: ensure we have a repo name 2
   set_fact:
     _name: "{{ _config.url|urlsplit('hostname') }}"
-  when: _config.name is undefined
+  when: _config.name is undefined or not _config.name
 
 - name: Add key for {{ _name }} by content
   apt_key:
     data: "{{ _config.key }}"
     keyring: /usr/share/keyrings/{{ _name }}.gpg
-  when: _config.key is defined
+  when: _config.key is defined and _config.key
 
 - import_tasks: key_path.yml
-  when: _config.key is undefined
+  when: _config.key is undefined or not _config.key
 
 - name: Register final keyring stats
   stat:
@@ -54,6 +59,16 @@
     owner: root
     group: root
     mode: 0644
+  when: _config.style is undefined or _config.style == "deb822"
+
+- name: Add repository {{ _name }} in single line style
+  template:
+    src: repo.list.j2
+    dest: /etc/apt/sources.list.d/{{ _name }}.list
+    owner: root
+    group: root
+    mode: 0644
+  when: _config.style is defined and _config.style == "line"
 
 # apt currently only support meaningful pinning by hostname
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=858406
