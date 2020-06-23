@@ -51,6 +51,7 @@
     that:
       - _f.stat.exists
       - _f.stat.charset == 'binary'
+  when: not ansible_check_mode
 
 - name: Add repository {{ _name }}
   template:
