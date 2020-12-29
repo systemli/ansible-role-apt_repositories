@@ -1,7 +1,7 @@
 apt_repositories
 ================
 
-[![Build Status](https://github.com/systemli/ansible-role-apt_repositories/workflows/Molecule/badge.svg?branch=master)](https://github.com/systemli/ansible-role-apt_repositories/actions?query=workflow%3AIntegration)
+[![Build Status](https://github.com/systemli/ansible-role-apt_repositories/workflows/Integration/badge.svg?branch=master)](https://github.com/systemli/ansible-role-apt_repositories/actions?query=workflow%3AIntegration)
 
 Add third-party repositories in Debian and derivates and pin their packages.
 Follows guide from [Debian wiki](https://wiki.debian.org/DebianRepository/UseThirdParty).
