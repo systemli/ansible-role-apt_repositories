@@ -8,3 +8,4 @@ packages:
   - fuse-overlayfs
   - podman
   - slirp4netns
+  - libseccomp2
