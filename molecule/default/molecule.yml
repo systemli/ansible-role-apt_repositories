@@ -4,8 +4,8 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: bionic64-repo
-    box: ubuntu/bionic64
+  - name: bullseye64
+    box: debian/bullseye64
 lint: |
   set -e
   yamllint .

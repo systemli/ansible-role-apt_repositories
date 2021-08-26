@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: apt_repositories
+  namespace: systemli
   author: systemli.org
   description: Add third-party repositories on Debian in a secure way
   license:
@@ -10,6 +11,7 @@ galaxy_info:
       versions:
         - stretch
         - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - bionic

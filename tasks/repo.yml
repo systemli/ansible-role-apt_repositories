@@ -9,15 +9,9 @@
     name: _preset
   when: item.preset is defined
 
-# - debug:
-#     var: _preset
-
 - name: combine preset with given config
   set_fact:
     _config: "{{ _preset|default({})|combine(item) }}"
-
-# - debug:
-#     var: _config
 
 - name: ensure we have a repo name 1
   set_fact:
