@@ -1,7 +1,6 @@
 galaxy_info:
   role_name: apt_repositories
-  namespace: systemli
-  author: systemli.org
+  author: systemli
   description: Add third-party repositories on Debian in a secure way
   license:
     - GPL-3.0-only
