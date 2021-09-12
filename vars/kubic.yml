@@ -5,6 +5,8 @@ url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/sta
 suites: /
 key_path: kubic.asc
 packages:
+  - conmon
+  - crun
   - fuse-overlayfs
   - podman
   - slirp4netns
