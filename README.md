@@ -49,6 +49,7 @@ Current presets:
   - kubic
   - prosody
   - sury
+  - torproject
 
 PRs welcome!
 
