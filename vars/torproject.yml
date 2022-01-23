@@ -5,3 +5,4 @@ key_path: torproject.asc
 packages:
   - obfs4proxy
   - tor
+  - tor-geoipd
