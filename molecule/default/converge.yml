@@ -11,4 +11,4 @@
       # Gitlab runner test
       - preset: gitlab_runner
       # Test with binary key
-      - preset: sury
+      # - preset: sury  # not available on Ubuntu
