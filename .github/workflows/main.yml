@@ -18,7 +18,9 @@ jobs:
         distro:
           - debian11
           - debian10
+          - debian9
           - ubuntu2004
+          - ubuntu1804
 
     steps:
       - name: Check out the codebase.
