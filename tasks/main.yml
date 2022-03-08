@@ -10,6 +10,7 @@
   apt:
     update_cache: true
   changed_when: false
+  failed_when: false  # Ignore if we have outdated apt keys
 
 - name: Install dependecies
   apt:
