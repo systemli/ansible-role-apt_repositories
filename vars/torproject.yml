@@ -3,6 +3,5 @@ name: deb.torproject.org
 url: https://deb.torproject.org/torproject.org
 key_path: torproject.asc
 packages:
-  - obfs4proxy
   - tor
-  - tor-geoipd
+  - tor-geoipdb
