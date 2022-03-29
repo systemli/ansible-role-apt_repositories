@@ -1,7 +1,7 @@
 # Molecule managed
 
 ---
-file:
+ansible.builtin.file:
   /etc/hosts:
     exists: true
     owner: root

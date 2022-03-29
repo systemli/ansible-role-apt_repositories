@@ -1,7 +1,7 @@
 ---
 
 - name: Copy key to remote machine
-  copy:
+  ansible.builtin.copy:
     src: "{{ _config.key_path }}"
     dest: /tmp/{{ _name }}.gpg
     owner: root
@@ -11,18 +11,18 @@
   changed_when: false
 
 - name: Find out whether {{ _config.key_path }} is armored
-  stat:
+  ansible.builtin.stat:
     path: /tmp/{{ _name }}.gpg
   register: _file
 
 - name: Add armored key for {{ _name }} by path
-  apt_key:
+  ansible.builtin.apt_key:
     file: /tmp/{{ _name }}.gpg
     keyring: /usr/share/keyrings/{{ _name }}.gpg
   when: "'ascii' in _file.stat.charset"
 
 - name: Add binary key for {{ _name }} by path
-  copy:
+  ansible.builtin.copy:
     src: "{{ _config.key_path }}"
     dest: /usr/share/keyrings/{{ _name }}.gpg
     owner: root

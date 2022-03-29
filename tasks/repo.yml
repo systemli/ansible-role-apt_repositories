@@ -1,30 +1,30 @@
 ---
 
 - name: Clear preset
-  include_vars: null.yml
+  ansible.builtin.include_vars: null.yml
 
 - name: Read in preset
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item.preset }}.yml"
     name: _preset
   when: item.preset is defined
 
 - name: combine preset with given config
-  set_fact:
+  ansible.builtin.set_fact:
     _config: "{{ _preset|default({})|combine(item) }}"
 
 - name: ensure we have a repo name 1
-  set_fact:
+  ansible.builtin.set_fact:
     _name: "{{ _config.name }}"
   when: _config.name is defined and _config.name
 
 - name: ensure we have a repo name 2
-  set_fact:
+  ansible.builtin.set_fact:
     _name: "{{ _config.url|urlsplit('hostname') }}"
   when: _config.name is undefined or not _config.name
 
 - name: Add key for {{ _name }} by content
-  apt_key:
+  ansible.builtin.apt_key:
     data: "{{ _config.key }}"
     keyring: /usr/share/keyrings/{{ _name }}.gpg
   when: _config.key is defined and _config.key
@@ -33,7 +33,7 @@
   when: _config.key is undefined or not _config.key
 
 - name: Register final keyring stats
-  stat:
+  ansible.builtin.stat:
     path: /usr/share/keyrings/{{ _name }}.gpg
   register: _f
 
@@ -41,14 +41,14 @@
 #     var: _f
 
 - name: Ensure we have binary key
-  assert:
+  ansible.builtin.assert:
     that:
       - _f.stat.exists
       - _f.stat.charset == 'binary'
   when: not ansible_check_mode
 
 - name: Add repository {{ _name }}
-  template:
+  ansible.builtin.template:
     src: repo.sources.j2
     dest: /etc/apt/sources.list.d/{{ _name }}.sources
     owner: root
@@ -57,7 +57,7 @@
   when: _config.style is undefined or _config.style == "deb822"
 
 - name: Add repository {{ _name }} in single line style
-  template:
+  ansible.builtin.template:
     src: repo.list.j2
     dest: /etc/apt/sources.list.d/{{ _name }}.list
     owner: root
@@ -69,7 +69,7 @@
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=858406
 
 - name: Add pinning preferences for {{ _name }}
-  template:
+  ansible.builtin.template:
     src: pref.j2
     dest: /etc/apt/preferences.d/{{ _name }}.pref
     owner: root
