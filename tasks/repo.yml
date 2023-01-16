@@ -9,16 +9,16 @@
     name: _preset
   when: item.preset is defined
 
-- name: combine preset with given config
+- name: Combine preset with given config
   ansible.builtin.set_fact:
     _config: "{{ _preset|default({})|combine(item) }}"
 
-- name: ensure we have a repo name 1
+- name: Ensure we have a repo name 1
   ansible.builtin.set_fact:
     _name: "{{ _config.name }}"
   when: _config.name is defined and _config.name
 
-- name: ensure we have a repo name 2
+- name: Ensure we have a repo name 2
   ansible.builtin.set_fact:
     _name: "{{ _config.url|urlsplit('hostname') }}"
   when: _config.name is undefined or not _config.name
@@ -29,7 +29,8 @@
     keyring: /usr/share/keyrings/{{ _name }}.gpg
   when: _config.key is defined and _config.key
 
-- import_tasks: key_path.yml
+- name: Configure key by supplied path
+  import_tasks: key_path.yml
   when: _config.key is undefined or not _config.key
 
 - name: Register final keyring stats
