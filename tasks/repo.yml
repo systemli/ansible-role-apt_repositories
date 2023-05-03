@@ -11,7 +11,7 @@
 
 - name: Combine preset with given config
   ansible.builtin.set_fact:
-    _config: "{{ _preset|default({})|combine(item) }}"
+    _config: "{{ _preset | default({}) | combine(item) }}"
 
 - name: Ensure we have a repo name 1
   ansible.builtin.set_fact:
@@ -20,7 +20,7 @@
 
 - name: Ensure we have a repo name 2
   ansible.builtin.set_fact:
-    _name: "{{ _config.url|urlsplit('hostname') }}"
+    _name: "{{ _config.url | urlsplit('hostname') }}"
   when: _config.name is undefined or not _config.name
 
 - name: Add key for {{ _name }} by content
