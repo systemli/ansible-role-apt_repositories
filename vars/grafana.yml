@@ -1,6 +1,6 @@
 ---
 # Name of the sources file
-name: packages.grafana.com
+filename: packages.grafana.com
 # Url of the Debian Repo
 url: https://packages.grafana.com/oss/deb
 # Name of the key file under files
