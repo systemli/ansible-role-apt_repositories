@@ -1,6 +1,5 @@
 ---
-name: download_jitsi_org
-old_name: download.jitsi.org
+name: download.jitsi.org
 url: https://download.jitsi.org/
 key_path: jitsi-archive-keyring.gpg
 suites: stable/
