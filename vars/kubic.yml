@@ -1,5 +1,5 @@
 ---
-name: kubic
+filename: kubic
 style: line
 url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ 'x' if ansible_distribution == 'Ubuntu' else '' }}{{ ansible_distribution }}_{{ ansible_distribution_version }}/
 suites: /

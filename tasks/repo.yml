@@ -15,13 +15,13 @@
 
 - name: Ensure we have a repo name 1
   ansible.builtin.set_fact:
-    _name: "{{ _config.name }}"
-  when: _config.name is defined and _config.name
+    _name: "{{ _config.filename }}"
+  when: _config.filename is defined and _config.filename
 
 - name: Ensure we have a repo name 2
   ansible.builtin.set_fact:
     _name: "{{ _config.url | urlsplit('hostname') }}"
-  when: _config.name is undefined or not _config.name
+  when: _config.filename is undefined or not _config.filename
 
 - name: Add key for {{ _name }} by content
   ansible.builtin.apt_key:
