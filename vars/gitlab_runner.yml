@@ -1,5 +1,6 @@
 ---
-name: gitlab_runner.packages.gitlab.com
+name: gitlab_runner_packages_gitlab_com
+old_name: gitlab_runner.packages.gitlab.com
 url: https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_distribution | lower }}/
 key_path: gitlab.asc
 packages:

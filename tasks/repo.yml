@@ -23,6 +23,16 @@
     _name: "{{ _config.url | urlsplit('hostname') }}"
   when: _config.name is undefined or not _config.name
 
+- name: Remove files with old_name
+  ansible.builtin.file:
+    path: /usr/share/keyrings/{{ _config.old_name }}.gpg
+    state: absent
+  loop:
+    - /usr/share/keyrings/{{ _config.old_name }}.gpg
+    - /etc/apt/sources.list.d/{{ _config.old_name }}.sources
+    - /etc/apt/sources.list.d/{{ _config.old_name }}.list
+    - /etc/apt/preferences.d/{{ _config.old_name }}.pref
+
 - name: Add key for {{ _name }} by content
   ansible.builtin.apt_key:
     data: "{{ _config.key }}"
@@ -37,9 +47,6 @@
   ansible.builtin.stat:
     path: /usr/share/keyrings/{{ _name }}.gpg
   register: _f
-
-# - debug:
-#     var: _f
 
 - name: Ensure we have binary key
   ansible.builtin.assert:

@@ -1,5 +1,6 @@
 ---
-name: packages.gitlab.com
+name: packages_gitlab_com
+old_name: packages.gitlab.com
 url: https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_distribution | lower }}/
 key_path: gitlab.asc
 packages:
