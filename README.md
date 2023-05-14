@@ -30,7 +30,7 @@ Further possible variables (and their defaults) are:
 ```
 apt_repositories:
   - url: https://...
-    name: "{{ item.url|urlsplit('hostname') }}"
+    filename: "{{ item.url|urlsplit('hostname') }}"
     types: deb
     suites: "{{ ansible_distribution_release }}"
     components: main
@@ -62,7 +62,7 @@ Example Playbook
     - systemli.apt_repositories
   vars:
     apt_repositories:
-      - name: packages.gitlab.com
+      - filename: packages.gitlab.com
         url: https://packages.gitlab.com/gitlab/gitlab-ce/debian/
         key: "{{ gitlab_ce_key }}"
         packages:
@@ -89,7 +89,7 @@ dependencies:
   - role: systemli.apt_repositories
     vars:
       apt_repositories:
-        - name: download.jitsi.org
+        - filename: download.jitsi.org
           url: https://download.jitsi.org/
           key_path: jitsi-archive-keyring.gpg
           suites: stable/
