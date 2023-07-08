@@ -11,7 +11,7 @@ It defaults to deb822, but also allows single line style ([manpage](https://manp
 Requirements
 ------------
 
-Debian 9+ or Ubuntu 18.04+. Other versions of Debian/Ubuntu might be supported as well, but aren't tested.
+Debian 10+ or Ubuntu 20.04+. Other versions of Debian/Ubuntu might be supported as well, but aren't tested.
 
 Role Variables
 --------------

@@ -1,9 +1,12 @@
 ---
 driver:
-  name: vagrant
+  name: docker
 platforms:
-  - name: bullseye64
-    box: debian/bullseye64
+  - name: debian12
+    image: geerlingguy/docker-debian12-ansible:latest
 provisioner:
   name: ansible
-  become: True
+  ansible_args:
+    - --diff
+  become: true
+lint: yamllint .
