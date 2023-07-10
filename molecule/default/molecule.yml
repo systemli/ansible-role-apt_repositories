@@ -9,4 +9,3 @@ provisioner:
   ansible_args:
     - --diff
   become: true
-lint: yamllint .
