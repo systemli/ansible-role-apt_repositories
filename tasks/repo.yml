@@ -23,23 +23,20 @@
     _name: "{{ _config.url | urlsplit('hostname') }}"
   when: _config.filename is undefined or not _config.filename
 
-- name: Add key for {{ _name }} by content
+- name: Add key by content for {{ _name }}
   ansible.builtin.apt_key:
     data: "{{ _config.key }}"
     keyring: /usr/share/keyrings/{{ _name }}.gpg
   when: _config.key is defined and _config.key
 
 - name: Configure key by supplied path
-  import_tasks: key_path.yml
+  ansible.builtin.import_tasks: key_path.yml
   when: _config.key is undefined or not _config.key
 
 - name: Register final keyring stats
   ansible.builtin.stat:
     path: /usr/share/keyrings/{{ _name }}.gpg
   register: _f
-
-# - debug:
-#     var: _f
 
 - name: Ensure we have binary key
   ansible.builtin.assert:
@@ -57,7 +54,7 @@
     mode: 0644
   when: _config.style is undefined or _config.style == "deb822"
 
-- name: Add repository {{ _name }} in single line style
+- name: Add single-line style repository {{ _name }}
   ansible.builtin.template:
     src: repo.list.j2
     dest: /etc/apt/sources.list.d/{{ _name }}.list
