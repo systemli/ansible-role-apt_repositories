@@ -7,16 +7,15 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - bookworm
         - buster
         - bullseye
     - name: Ubuntu
       versions:
         - bionic
         - focal
-
   galaxy_tags:
     - apt
     - https
     - secure
-
 dependencies: []
