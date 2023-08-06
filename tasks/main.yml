@@ -26,7 +26,7 @@
   ansible.builtin.setup:
 
 - name: Configure repo
-  include_tasks: repo.yml
+  ansible.builtin.include_tasks: repo.yml
   loop: "{{ apt_repositories }}"
 
 - name: Update cache
