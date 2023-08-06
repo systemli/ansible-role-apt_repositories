@@ -47,7 +47,6 @@ Current presets:
   - gitlab
   - grafana
   - jitsi
-  - kubic
   - prosody
   - sury
   - torproject
