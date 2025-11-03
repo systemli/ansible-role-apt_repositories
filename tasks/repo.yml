@@ -1,5 +1,4 @@
 ---
-
 - name: Clear preset
   ansible.builtin.include_vars: null.yml
 

@@ -1,5 +1,4 @@
 ---
-
 - name: Copy key to remote machine
   ansible.builtin.copy:
     src: "{{ _config.key_path }}"
