@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: apt_repositories
   author: systemli
@@ -8,12 +9,10 @@ galaxy_info:
     - name: Debian
       versions:
         - bookworm
-        - buster
         - bullseye
     - name: Ubuntu
       versions:
-        - bionic
-        - focal
+        - noble
   galaxy_tags:
     - apt
     - https
