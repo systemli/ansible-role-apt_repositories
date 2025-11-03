@@ -15,22 +15,22 @@
 - name: Ensure we have a repo name 1
   ansible.builtin.set_fact:
     _name: "{{ _config.filename }}"
-  when: _config.filename is defined and _config.filename
+  when: _config.filename is defined
 
 - name: Ensure we have a repo name 2
   ansible.builtin.set_fact:
     _name: "{{ _config.url | urlsplit('hostname') }}"
-  when: _config.filename is undefined or not _config.filename
+  when: _config.filename is undefined
 
 - name: Add key by content for {{ _name }}
   ansible.builtin.apt_key:
     data: "{{ _config.key }}"
     keyring: /usr/share/keyrings/{{ _name }}.gpg
-  when: _config.key is defined and _config.key
+  when: _config.key is defined
 
 - name: Configure key by supplied path
   ansible.builtin.import_tasks: key_path.yml
-  when: _config.key is undefined or not _config.key
+  when: _config.key is undefined
 
 - name: Register final keyring stats
   ansible.builtin.stat:
