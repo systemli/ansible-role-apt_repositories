@@ -4,3 +4,6 @@ url: https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_distribution | lowe
 key_path: gitlab.asc
 packages:
   - gitlab-ce
+  - gitlab-cli
+  - gitlab-runner
+  - gitlab-runner-helper-images
