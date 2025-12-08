@@ -1,0 +1,8 @@
+---
+
+filename: crowdsec
+key_path: crowdsec.debian.gpg
+packages: ["crowdsec", "crowdsec-firewall-bouncer-nftables"]
+suites: any
+types: deb
+url: https://packagecloud.io/crowdsec/crowdsec/any

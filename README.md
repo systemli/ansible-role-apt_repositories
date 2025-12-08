@@ -44,6 +44,7 @@ Presets can be partially overridden.
 Current presets:
 
   - caddy
+  - crowdsec
   - gitlab
   - grafana
   - jitsi
