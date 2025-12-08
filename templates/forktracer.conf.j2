@@ -1,0 +1,9 @@
+{% if _config.packages is defined %}
+{% for pkg in _config.packages %}
+Package: {{ pkg }}
+Accept-Origin: *
+Track-Origin: *
+Track-Version: =candidate
+
+{% endfor %}
+{% endif %}

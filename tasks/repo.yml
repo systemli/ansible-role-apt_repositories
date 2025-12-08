@@ -72,3 +72,19 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Ensure APT forktracer config directory exists
+  ansible.builtin.file:
+    mode: 0755
+    path: /etc/apt/forktracer.d
+    state: directory
+  when: apt_repositories_forktracer
+
+- name: Provide APT forktracer config as per repo
+  ansible.builtin.template:
+    src: forktracer.conf.j2
+    dest: /etc/apt/forktracer.d/{{ _name }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: apt_repositories_forktracer
