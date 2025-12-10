@@ -7,5 +7,3 @@ apt_repositories_dependencies:
 
 apt_repositories_absent:
   - deb_torproject_org_torproject_org.list
-
-apt_repositories_forktracer: true
