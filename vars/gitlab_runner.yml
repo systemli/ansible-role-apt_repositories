@@ -4,3 +4,4 @@ url: https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_distribution | 
 key_path: gitlab.asc
 packages:
   - gitlab-runner
+  - gitlab-runner-helper-images

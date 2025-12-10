@@ -5,5 +5,3 @@ key_path: gitlab.asc
 packages:
   - gitlab-ce
   - gitlab-cli
-  - gitlab-runner
-  - gitlab-runner-helper-images
