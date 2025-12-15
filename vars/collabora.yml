@@ -1,0 +1,17 @@
+---
+
+components: ''
+filename: collabora-code
+key_path: collaboraonline-release-keyring.gpg
+packages:
+  - code-brand
+  - collaboraofficebasis-de
+  - collaboraofficebasis-es
+  - collaboraofficebasis-fr
+  - collaboraoffice-dict-de
+  - collaboraoffice-dict-en
+  - collaboraoffice-dict-es
+  - collaboraoffice-dict-fr
+  - coolwsd
+suites: ./
+url: https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-deb
