@@ -1,0 +1,9 @@
+---
+
+components: main
+key_path: onlyoffice.gpg
+packages:
+  - onlyoffice-documentserver
+  - ttf-mscorefonts-installer
+suites: squeeze
+url: https://download.onlyoffice.com/repo/debian
