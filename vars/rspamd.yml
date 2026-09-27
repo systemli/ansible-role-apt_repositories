@@ -1,0 +1,11 @@
+---
+
+components: main
+filename: rspamd
+url: "https://rspamd.com/apt-stable/"
+types: deb
+suites: "{{ ansible_distribution_release }}"
+key_path: rspamd-apt-stable.gpg
+packages:
+  - rspamd
+  - redis-server

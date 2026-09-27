@@ -10,5 +10,7 @@
       - preset: gitlab
       # Gitlab runner test
       - preset: gitlab_runner
+      # Rspamd test
+      - preset: rspamd
       # Test with binary key
       # - preset: sury  # not available on Ubuntu

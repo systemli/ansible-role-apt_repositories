@@ -49,6 +49,7 @@ Current presets:
   - grafana
   - jitsi
   - prosody
+  - rspamd
   - sury
   - torproject
 
