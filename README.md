@@ -11,7 +11,7 @@ It defaults to deb822, but also allows single line style ([manpage](https://manp
 Requirements
 ------------
 
-Debian 9+ or Ubuntu 18.04+. Other versions of Debian/Ubuntu might be supported as well, but aren't tested.
+Debian 12 (bookworm) and 13 (trixie) or Ubuntu 24.04 (noble), which are tested in CI. Other versions of Debian/Ubuntu might be supported as well, but aren't tested.
 
 Role Variables
 --------------
@@ -97,6 +97,20 @@ dependencies:
           suites: stable/
           components: ''
           packages: "{{ jitsi_meet_packages }}"
+```
+
+Tests
+-----
+
+The role is tested with [Molecule](https://ansible.readthedocs.io/projects/molecule/) using the Docker driver and the
+`geerlingguy/docker-<distro>-ansible` images. CI (GitHub Actions) runs it on `debian13`, `debian12` and `ubuntu2404`.
+
+To run it locally you need Docker (or a compatible runtime), `molecule`, `molecule-plugins[docker]` and `ansible-lint`:
+
+```
+MOLECULE_DISTRO=debian13 molecule test
+MOLECULE_DISTRO=debian13 molecule converge   # keep the container for debugging
+molecule login
 ```
 
 License
