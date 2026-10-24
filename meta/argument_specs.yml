@@ -1,0 +1,75 @@
+---
+argument_specs:
+  main:
+    short_description: Add third-party APT repositories and pin their packages
+    description:
+      - Adds repositories in deb822 or single-line style including their signing keys and pins their packages.
+    options:
+      apt_repositories:
+        type: list
+        elements: dict
+        required: true
+        description:
+          - List of repositories to configure.
+        options:
+          preset:
+            type: str
+            description:
+              - Name of a preset in the role's C(vars) directory (for example C(caddy), C(gitlab) or C(sury)).
+              - Preset values can be partially overridden by the other keys.
+          url:
+            type: str
+            description:
+              - Repository URL. Required unless provided by the preset.
+          filename:
+            type: str
+            description:
+              - Base name of the generated files and keyring. Defaults to the hostname of C(url).
+          style:
+            type: str
+            choices: [deb822, line]
+            description:
+              - Format of the repository definition. Defaults to C(deb822).
+          types:
+            type: str
+            description:
+              - Repository types. Defaults to C(deb).
+          suites:
+            type: str
+            description:
+              - Suites. Defaults to the distribution release. Required for style C(line).
+          components:
+            type: str
+            description:
+              - Components. Defaults to C(main).
+          arch:
+            type: str
+            description:
+              - Architecture restriction (deb822 style only).
+          packages:
+            type: list
+            elements: str
+            description:
+              - Packages to pin with priority 500 for this repository.
+          pin:
+            type: bool
+            description:
+              - Whether to add pinning preferences. Defaults to C(true).
+          key:
+            type: str
+            description:
+              - Armored signing key content. Mutually exclusive with C(key_path).
+          key_path:
+            type: str
+            description:
+              - Path to a key file in the role's C(files) directory. Used if C(key) is not set.
+      apt_repositories_dependencies:
+        type: list
+        elements: str
+        description:
+          - Packages installed as prerequisites.
+      apt_repositories_absent:
+        type: list
+        elements: str
+        description:
+          - File names in C(/etc/apt/sources.list.d) to remove.
