@@ -14,7 +14,6 @@ Ansible role that adds third-party APT repositories (deb822 or one-line style) o
 ## Checks
 
 - `ansible-lint .` must pass (it creates `.ansible/`; git ignored, never commit it)
-- `yamllint .` uses the repo's `.yamllint`
 - `molecule test` runs the role in a Docker container; CI runs it on Debian 12/13 and Ubuntu 24.04
 - A new preset needs a `vars/<name>.yml`, its key in `files/` if binary, and an entry in the README list
 

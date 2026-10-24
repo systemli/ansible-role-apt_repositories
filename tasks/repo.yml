@@ -50,7 +50,7 @@
     dest: /etc/apt/sources.list.d/{{ _name }}.sources
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: _config.style is undefined or _config.style == "deb822"
 
 - name: Add single-line style repository {{ _name }}
@@ -59,7 +59,7 @@
     dest: /etc/apt/sources.list.d/{{ _name }}.list
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: _config.style is defined and _config.style == "line"
 
 # apt currently only support meaningful pinning by hostname
@@ -71,5 +71,5 @@
     dest: /etc/apt/preferences.d/{{ _name }}.pref
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: _config.pin | default(true) | bool
