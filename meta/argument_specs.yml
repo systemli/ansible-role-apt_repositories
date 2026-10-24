@@ -68,10 +68,8 @@ argument_specs:
         elements: str
         description:
           - Packages installed as prerequisites.
-        default: [ca-certificates, file, gnupg]
       apt_repositories_absent:
         type: list
         elements: str
         description:
           - File names in C(/etc/apt/sources.list.d) to remove.
-        default: [deb_torproject_org_torproject_org.list]
