@@ -5,7 +5,7 @@
     dest: /tmp/{{ _name }}.gpg
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   check_mode: false
   changed_when: false
 
@@ -27,5 +27,5 @@
     dest: /usr/share/keyrings/{{ _name }}.gpg
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: _file.stat.charset == 'binary'
