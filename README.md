@@ -31,12 +31,20 @@ Further possible variables (and their defaults) are:
 apt_repositories:
   - url: https://...
     filename: "{{ item.url|urlsplit('hostname') }}"
+    style: deb822  # or `line`
     types: deb
     suites: "{{ ansible_distribution_release }}"
     components: main
+    arch: # architecture restriction (deb822 style only)
     packages: []
+    pin: true
     key_path: # a file path in the role `files` dir instead of `key`
+
+apt_repositories_dependencies: [ca-certificates, file, gnupg]
+apt_repositories_absent: [deb_torproject_org_torproject_org.list]
 ```
+
+`apt_repositories` is required. See `meta/argument_specs.yml` for all variables.
 
 Furthermore, it supports `preset` values. For an example see `vars/gitlab.yml`.
 Presets can be partially overridden.
