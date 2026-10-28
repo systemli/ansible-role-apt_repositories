@@ -33,7 +33,7 @@ apt_repositories:
     filename: "{{ item.url|urlsplit('hostname') }}"
     style: deb822  # or `line`
     types: deb
-    suites: "{{ ansible_distribution_release }}"
+    suites: "{{ ansible_facts['distribution_release'] }}"
     components: main
     arch: # architecture restriction (deb822 style only)
     packages: []

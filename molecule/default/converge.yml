@@ -14,3 +14,9 @@
       - preset: rspamd
       # Test with binary key
       # - preset: sury  # not available on Ubuntu
+      # Inline `key:` content exercises the staging/dearmor branch
+      - filename: crowdsec-inline
+        url: https://packagecloud.io/crowdsec/crowdsec/any
+        types: deb
+        suites: any
+        key: "{{ lookup('ansible.builtin.file', playbook_dir + '/../../files/crowdsec.debian.gpg') }}"

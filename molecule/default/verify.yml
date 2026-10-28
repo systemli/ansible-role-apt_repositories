@@ -1,0 +1,64 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Stat installed keyrings
+      ansible.builtin.stat:
+        path: "/usr/share/keyrings/{{ item }}.gpg"
+      loop:
+        - packages.gitlab.com
+        - gitlab_runner.packages.gitlab.com
+        - rspamd
+        - crowdsec-inline
+      register: keyrings
+
+    - name: Assert keyrings exist and are binary
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.charset == 'binary'
+      loop: "{{ keyrings.results }}"
+
+    - name: Assert inline keyring parses as an OpenPGP keyring
+      ansible.builtin.command: >
+        gpg --batch --no-default-keyring
+        --keyring /usr/share/keyrings/crowdsec-inline.gpg --list-keys
+      changed_when: false
+
+    - name: Stat leftover temporary key files
+      ansible.builtin.stat:
+        path: "/tmp/{{ item }}"
+      loop:
+        - packages.gitlab.com.gpg
+        - gitlab_runner.packages.gitlab.com.gpg
+        - rspamd.gpg
+        - crowdsec-inline.gpg
+        - packages.gitlab.com.dearmored.gpg
+        - gitlab_runner.packages.gitlab.com.dearmored.gpg
+        - rspamd.dearmored.gpg
+        - crowdsec-inline.dearmored.gpg
+      register: temps
+
+    - name: Assert no temporary key files remain
+      ansible.builtin.assert:
+        that:
+          - not item.stat.exists
+      loop: "{{ temps.results }}"
+
+    - name: Stat source files
+      ansible.builtin.stat:
+        path: "/etc/apt/sources.list.d/{{ item }}.sources"
+      loop:
+        - packages.gitlab.com
+        - gitlab_runner.packages.gitlab.com
+        - rspamd
+        - crowdsec-inline
+      register: sources
+
+    - name: Assert source files exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+      loop: "{{ sources.results }}"

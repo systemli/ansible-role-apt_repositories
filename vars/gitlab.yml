@@ -1,6 +1,6 @@
 ---
 filename: packages.gitlab.com
-url: https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_distribution | lower }}/
+url: https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_facts['distribution'] | lower }}/
 key_path: gitlab.asc
 packages:
   - gitlab-ce

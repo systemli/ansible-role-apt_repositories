@@ -1,6 +1,6 @@
 ---
 filename: gitlab_runner.packages.gitlab.com
-url: https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_distribution | lower }}/
+url: https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_facts['distribution'] | lower }}/
 key_path: gitlab.asc
 packages:
   - gitlab-runner

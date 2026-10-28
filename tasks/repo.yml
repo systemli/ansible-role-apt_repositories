@@ -22,15 +22,19 @@
     _name: "{{ _config.url | urlsplit('hostname') }}"
   when: _config.filename is undefined
 
-- name: Add key by content for {{ _name }}
-  ansible.builtin.apt_key:
-    data: "{{ _config.key }}"
-    keyring: /usr/share/keyrings/{{ _name }}.gpg
+- name: Stage key by content for {{ _name }}
+  ansible.builtin.copy:
+    content: "{{ _config.key }}"
+    dest: /tmp/{{ _name }}.gpg
+    owner: root
+    group: root
+    mode: 0644
+  check_mode: false
+  changed_when: false
   when: _config.key is defined
 
-- name: Configure key by supplied path
+- name: Configure key by supplied path or content
   ansible.builtin.import_tasks: key_path.yml
-  when: _config.key is undefined
 
 - name: Register final keyring stats
   ansible.builtin.stat:

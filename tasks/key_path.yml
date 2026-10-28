@@ -8,24 +8,45 @@
     mode: "0644"
   check_mode: false
   changed_when: false
+  when: _config.key is undefined
 
-- name: Find out whether key is ascii armored at {{ _config.key_path }}
+- name: Find out whether key is ascii armored for {{ _name }}
   ansible.builtin.stat:
     path: /tmp/{{ _name }}.gpg
   register: _file
 
-- name: Dearmor and add ascii key by path for {{ _name }}
+- name: Dearmor ascii key for {{ _name }}
   ansible.builtin.command: |
-    gpg --batch --dearmor -o /usr/share/keyrings/{{ _name }}.gpg /tmp/{{ _name }}.gpg
-  args:
-    creates: /usr/share/keyrings/{{ _name }}.gpg
+    gpg --batch --yes --dearmor -o /tmp/{{ _name }}.dearmored.gpg /tmp/{{ _name }}.gpg
+  changed_when: false
   when: "'ascii' in _file.stat.charset"
 
-- name: Add binary key by path for {{ _name }}
+- name: Install dearmored ascii key for {{ _name }}
   ansible.builtin.copy:
-    src: "{{ _config.key_path }}"
+    src: /tmp/{{ _name }}.dearmored.gpg
+    remote_src: true
+    dest: /usr/share/keyrings/{{ _name }}.gpg
+    owner: root
+    group: root
+    mode: 0644
+  when: "'ascii' in _file.stat.charset and not ansible_check_mode"
+
+- name: Install binary key for {{ _name }}
+  ansible.builtin.copy:
+    src: /tmp/{{ _name }}.gpg
+    remote_src: true
     dest: /usr/share/keyrings/{{ _name }}.gpg
     owner: root
     group: root
     mode: "0644"
   when: _file.stat.charset == 'binary'
+
+- name: Remove temporary key files
+  ansible.builtin.file:
+    path: "/tmp/{{ item }}"
+    state: absent
+  loop:
+    - "{{ _name }}.gpg"
+    - "{{ _name }}.dearmored.gpg"
+  check_mode: false
+  changed_when: false
